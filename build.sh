@@ -4,7 +4,7 @@ UNIVERSAL_OUTPUTFOLDER=$BUILD_DIR/$PROJECT_NAME-universal
 
 mkdir -p "${UNIVERSAL_OUTPUTFOLDER}"
 
-#----- Make macCatalyst archive
+#----- Make Mac Catalyst archive
 xcodebuild archive \
   -scheme APSHTTPClient \
   -archivePath $BUILD_DIR/macCatalyst.xcarchive \
