@@ -1,6 +1,6 @@
 /**
  * Appcelerator APSHTTPClient Library
- * Copyright (c) 2014 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright TiDev, Inc. 04/07/2022-Present. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -17,7 +17,11 @@
 - (void)setStringData:(NSString *)str;
 - (void)appendData:(NSData *)data withContentType:(NSString *)contentType;
 
-- (void)addDictionay:(NSDictionary *)dict;
+/**
+ * @deprecated Use `addDictionary:` instead.
+ */
+- (void)addDictionay:(NSDictionary *)dict __attribute__((deprecated));
+- (void)addDictionary:(NSDictionary *)dict;
 - (void)addFormKey:(NSString *)key andValue:(NSString *)value;
 
 - (void)addFormFile:(NSString *)path;

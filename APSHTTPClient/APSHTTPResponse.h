@@ -1,6 +1,6 @@
 /**
  * Appcelerator APSHTTPClient Library
- * Copyright (c) 2014 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright TiDev, Inc. 04/07/2022-Present. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -38,8 +38,16 @@ typedef NS_ENUM(NSInteger, APSHTTPResponseState) {
 @property (nonatomic, assign, readwrite) BOOL connected; // should be protocol (used by APSHTTPRequest)
 @property (nonatomic, assign, readwrite) APSHTTPResponseState readyState; // should be protocol (used by APSHTTPRequest)
 
-- (void)updateRequestParamaters:(NSURLRequest *)request;
-- (void)updateResponseParamaters:(NSURLResponse *)response;
+/**
+ * @deprecated Use `updateRequestParameters:` instead.
+ */
+- (void)updateRequestParamaters:(NSURLRequest *)request __attribute__((deprecated));
+- (void)updateRequestParameters:(NSURLRequest *)request;
+/**
+ * @deprecated Use `updateResponseParameters:` instead.
+ */
+- (void)updateResponseParamaters:(NSURLResponse *)response __attribute__((deprecated));
+- (void)updateResponseParameters:(NSURLResponse *)response;
 
 - (void)appendData:(NSData *)data;
 @end

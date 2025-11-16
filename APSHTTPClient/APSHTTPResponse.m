@@ -1,6 +1,6 @@
 /**
  * Appcelerator APSHTTPClient Library
- * Copyright (c) 2014 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright TiDev, Inc. 04/07/2022-Present. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -19,6 +19,10 @@
 
 - (void)updateResponseParamaters:(NSURLResponse *)response
 {
+  [self updateResponseParameters:response];
+}
+- (void)updateResponseParameters:(NSURLResponse *)response
+{
   _url = [response URL];
   if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
     _status = [(NSHTTPURLResponse *)response statusCode];
@@ -30,6 +34,10 @@
 }
 
 - (void)updateRequestParamaters:(NSURLRequest *)request
+{
+  [self updateRequestParameters:request];
+}
+- (void)updateRequestParameters:(NSURLRequest *)request
 {
   _connectionType = [request HTTPMethod];
   _location = [[request URL] absoluteString];

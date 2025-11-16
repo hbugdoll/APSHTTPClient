@@ -1,6 +1,6 @@
 /**
  * Appcelerator APSHTTPClient Library
- * Copyright (c) 2014-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright TiDev, Inc. 04/07/2022-Present. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -137,9 +137,9 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     self.task = [self.session dataTaskWithRequest:self.request
                                 completionHandler:^(NSData *__nullable data, NSURLResponse *__nullable response, NSError *__nullable error) {
                                   [self.response appendData:data];
-                                  [self.response updateResponseParamaters:response];
+                                  [self.response updateResponseParameters:response];
                                   [self.response setError:error];
-                                  [self.response updateRequestParamaters:self.request];
+                                  [self.response updateRequestParameters:self.request];
                                   [self.response setReadyState:APSHTTPResponseStateDone];
                                   [self.response setConnected:NO];
 
@@ -149,7 +149,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     [self.task resume];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
   } else {
-    [self.response updateRequestParamaters:self.request];
+    [self.response updateRequestParameters:self.request];
     [self.response setReadyState:APSHTTPResponseStateOpened];
     [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
 
@@ -355,12 +355,12 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 {
   DebugLog(@"Code %li Redirecting from: %@ to: %@", (long)[(NSHTTPURLResponse *)response statusCode], [self.request URL], [request URL]);
   self.response.connected = YES;
-  [self.response updateResponseParamaters:response];
+  [self.response updateResponseParameters:response];
   if (!self.redirects && self.response.status != 0) {
     completionHandler(nil);
     return;
   }
-  [self.response updateRequestParamaters:request];
+  [self.response updateRequestParameters:request];
   [self invokeCallbackWithState:APSHTTPCallbackStateRedirect];
   if (response) {
     NSMutableURLRequest *r = [self.request mutableCopy];
@@ -377,7 +377,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
   DebugLog(@"%s", __PRETTY_FUNCTION__);
   self.response.readyState = APSHTTPResponseStateHeaders;
   self.response.connected = YES;
-  [self.response updateResponseParamaters:response];
+  [self.response updateResponseParameters:response];
   if (self.response.status == 0) {
     [self URLSession:self.session
         didBecomeInvalidWithError:

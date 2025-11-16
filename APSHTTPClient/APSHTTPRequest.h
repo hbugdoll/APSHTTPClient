@@ -1,6 +1,6 @@
 /**
  * Appcelerator APSHTTPClient Library
- * Copyright (c) 2014-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright TiDev, Inc. 04/07/2022-Present. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -61,14 +61,14 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 
 /*!
  @discussion An optional NSOperationQueue for delegate callbacks.
- The default value is nil, which means delegate callbakcs occur on
+ The default value is nil, which means delegate callbacks occur on
  the caller's thread if the synchronous property is NO. If the 
  synchronous property is YES then this property is ignored.
  */
 @property (nonatomic, strong, readwrite) NSOperationQueue *theQueue;
 
 /*!
- @discussion An optioanl array of run loop modes for delegate calllbacks
+ @discussion An optional array of run loop modes for delegate callbacks
  on the run loop of the caller's thread. The default is one element 
  array containing NSDefaultRunLoopMode. This is an advanced property,
  and is ignored if synchronous is YES or theQueue is not nil. It is

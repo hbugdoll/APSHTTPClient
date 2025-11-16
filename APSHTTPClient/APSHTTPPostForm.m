@@ -1,6 +1,6 @@
 /**
  * Appcelerator APSHTTPClient Library
- * Copyright (c) 2014 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright TiDev, Inc. 04/07/2022-Present. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -9,7 +9,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @implementation APSHTTPPostForm {
-  NSMutableDictionary *_requestFormDictionay;
+  NSMutableDictionary *_requestFormDictionary;
   NSMutableArray *_requestFilesArray;
   NSMutableDictionary *_headers;
   NSMutableData *_postFormData;
@@ -24,7 +24,7 @@
 
 - (void)destroyTemporaryData
 {
-  _requestFormDictionay = nil;
+  _requestFormDictionary = nil;
   _requestFilesArray = nil;
   _headers = nil;
   _jsonData = nil;
@@ -53,7 +53,7 @@
 
   [self addHeaderKey:@"Content-Type" andHeaderValue:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@", charset]];
   BOOL last = NO;
-  NSArray *allKeys = [[self requestFormDictionay] allKeys];
+  NSArray *allKeys = [[self requestFormDictionary] allKeys];
   for (NSInteger i = 0, len = [allKeys count]; i < len; i++) {
     if (i == len - 1) {
       last = YES;
@@ -61,7 +61,7 @@
     NSString *key = [allKeys objectAtIndex:i];
     [self appendStringData:[NSString stringWithFormat:@"%@=%@%@",
                                      [APSHTTPHelper encodeURL:key],
-                                     [APSHTTPHelper encodeURL:[[self requestFormDictionay] valueForKey:key]],
+                                     [APSHTTPHelper encodeURL:[[self requestFormDictionary] valueForKey:key]],
                                      (last ? @"" : @"&")]];
   }
 }
@@ -85,7 +85,7 @@
     //
     // --0xTibOuNdArY
   }
-  NSArray *allKeys = [[self requestFormDictionay] allKeys];
+  NSArray *allKeys = [[self requestFormDictionary] allKeys];
   NSInteger fileCount = [[self requestFilesArray] count];
   BOOL last = NO;
 
@@ -99,7 +99,7 @@
     [self appendStringData:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n", key]];
     [self appendStringData:[NSString stringWithFormat:@"Content-Type:text/plain;charset=%@\r\n", charset]];
     [self appendStringData:@"\r\n"];
-    [self appendStringData:[NSString stringWithFormat:@"%@\r\n", [[self requestFormDictionay] valueForKey:key]]];
+    [self appendStringData:[NSString stringWithFormat:@"%@\r\n", [[self requestFormDictionary] valueForKey:key]]];
     if (last == YES) {
       [self appendStringData:[NSString stringWithFormat:@"--%@--\r\n", boundary]];
     }
@@ -168,12 +168,12 @@
   return [_headers copy];
 }
 
-- (NSMutableDictionary *)requestFormDictionay
+- (NSMutableDictionary *)requestFormDictionary
 {
-  if (_requestFormDictionay == nil) {
-    _requestFormDictionay = [[NSMutableDictionary alloc] init];
+  if (_requestFormDictionary == nil) {
+    _requestFormDictionary = [[NSMutableDictionary alloc] init];
   }
-  return _requestFormDictionay;
+  return _requestFormDictionary;
 }
 - (NSMutableArray *)requestFilesArray
 {
@@ -207,12 +207,16 @@
 
 - (void)addDictionay:(NSDictionary *)dict
 {
-  [[self requestFormDictionay] setValuesForKeysWithDictionary:dict];
+  [self addDictionary:dict];
+}
+- (void)addDictionary:(NSDictionary *)dict
+{
+  [[self requestFormDictionary] setValuesForKeysWithDictionary:dict];
 }
 
 - (void)addFormKey:(NSString *)key andValue:(NSString *)value
 {
-  [[self requestFormDictionay] setValue:value forKey:key];
+  [[self requestFormDictionary] setValue:value forKey:key];
 }
 
 - (void)addFormFile:(NSString *)path;
